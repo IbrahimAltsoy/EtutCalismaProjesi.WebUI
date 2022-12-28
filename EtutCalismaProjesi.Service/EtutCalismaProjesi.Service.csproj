@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EtutCalismaProjesi.Data\EtutCalismaProjesi.Data.csproj" />
   </ItemGroup>
 

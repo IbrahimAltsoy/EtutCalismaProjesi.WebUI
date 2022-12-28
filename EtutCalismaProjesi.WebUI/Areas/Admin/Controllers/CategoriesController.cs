@@ -21,7 +21,7 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         // GET: CategoriesController
         public async Task<ActionResult> Index()
         {
-            var model =await _service.GetAllAsync();
+            var model = await _service.GetAllAsync();
             return View(model);
         }
 
@@ -39,7 +39,7 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         // toastNotification.AddSuccessToastMessage(ToastrMessaje.ToastrMessage.Article.ArticleUpdateSuccesfull(articleUpdateDTO.Title), new ToastrOptions
         //        {
         //            Title = "Başarılı"
-         //       });
+        //       });
 
         // POST: CategoriesController/Create
         [HttpPost]
@@ -92,7 +92,7 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
-                   
+
                     _service.Update(category);
                     _service.SaveChanges();
                     return RedirectToAction(nameof(Index));
