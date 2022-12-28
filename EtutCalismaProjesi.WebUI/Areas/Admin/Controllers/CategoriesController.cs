@@ -92,13 +92,22 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
-
+                    toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrUpdateSuccesfull(category.Name),
+                       new ToastrOptions
+                       {
+                           Title = "Başarılı"
+                       });
                     _service.Update(category);
                     _service.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    toastNotification.AddErrorToastMessage(MessajeToastr.ToastrUpdateUnSuccessfull(category.Name),
+                       new ToastrOptions
+                       {
+                           Title = "Başarısız!!!"
+                       });
                     ModelState.AddModelError("", "Hata Oluştu!");
                 }
             }
