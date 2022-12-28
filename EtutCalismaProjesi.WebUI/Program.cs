@@ -5,11 +5,18 @@ using EtutCalismaProjesi.Service.Absract;
 using EtutCalismaProjesi.Service.Concreate;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddNToastNotifyToastr(new ToastrOptions()
+    {
+        PositionClass = ToastPositions.TopRight,
+        TimeOut = 3000
+
+    });
 
 builder.Services.AddDbContext<DatabaseContext>(); 
 
@@ -31,6 +38,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseNToastNotify();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

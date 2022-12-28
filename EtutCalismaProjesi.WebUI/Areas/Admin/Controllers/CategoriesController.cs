@@ -1,7 +1,9 @@
 ﻿using EtutCalismaProjesi.Entities;
 using EtutCalismaProjesi.Service.Absract;
+using EtutCalismaProjesi.WebUI.ToastrMessage;
 using Microsoft.AspNetCore.Mvc;
-
+using NToastNotify;
+using static EtutCalismaProjesi.WebUI.ToastrMessage.ToastrMessage;
 
 namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 {
@@ -9,10 +11,12 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly IService<Category> _service;
-        public CategoriesController(IService<Category> service)
+        private readonly IToastNotification toastNotification;
+
+        public CategoriesController(IService<Category> service, IToastNotification toastNotification)
         {
             _service = service;
-           
+            this.toastNotification = toastNotification;
         }
         // GET: CategoriesController
         public async Task<ActionResult> Index()
@@ -32,6 +36,10 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         {
             return View();
         }
+        // toastNotification.AddSuccessToastMessage(ToastrMessaje.ToastrMessage.Article.ArticleUpdateSuccesfull(articleUpdateDTO.Title), new ToastrOptions
+        //        {
+        //            Title = "Başarılı"
+         //       });
 
         // POST: CategoriesController/Create
         [HttpPost]
@@ -42,12 +50,24 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
             {
                 try
                 {
+                    toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrAddSuccesfull(category.Name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarılı"
+                        });
+
+
                     await _service.AddAsync(category);
                     await _service.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    toastNotification.AddErrorToastMessage(MessajeToastr.ToastrAddUnSuccessfull(category.Name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarısız!!!"
+                        });
                     ModelState.AddModelError("", "Hata mesajı oluştu");
                 }
 
