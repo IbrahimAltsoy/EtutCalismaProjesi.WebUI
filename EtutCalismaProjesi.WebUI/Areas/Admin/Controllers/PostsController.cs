@@ -16,10 +16,11 @@ using EtutCalismaProjesi.WebUI.Utils;
 using NToastNotify;
 using System.Drawing.Drawing2D;
 using static EtutCalismaProjesi.WebUI.ToastrMessage.ToastrMessage;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize]
     public class PostsController : Controller
     {
         private readonly IService<Post> _service;

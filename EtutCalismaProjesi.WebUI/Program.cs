@@ -7,6 +7,7 @@ using EtutCalismaProjesi.Service.Concreate;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NToastNotify;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 

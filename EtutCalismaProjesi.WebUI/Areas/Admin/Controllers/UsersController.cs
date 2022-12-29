@@ -1,13 +1,29 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EtutCalismaProjesi.Entities;
+using EtutCalismaProjesi.Service.Absract;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
+using static EtutCalismaProjesi.WebUI.ToastrMessage.ToastrMessage;
 
 namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 {
+    [Area("Admin"), Authorize]
     public class UsersController : Controller
     {
-        // GET: UsersController
-        public ActionResult Index()
+        private readonly IService<User> _service;
+        private readonly IToastNotification toastNotification;
+
+        public UsersController(IService<User> service, IToastNotification toastNotification)
         {
+            _service = service;
+            this.toastNotification = toastNotification;
+        }
+        // GET: UsersController
+        public async Task<ActionResult> IndexAsync()
+        {
+            var model = await _service.GetAllAsync();
+            return View(model);
             return View();
         }
 
@@ -22,56 +38,109 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         {
             return View();
         }
+        // toastNotification.AddSuccessToastMessage(ToastrMessaje.ToastrMessage.Article.ArticleUpdateSuccesfull(articleUpdateDTO.Title), new ToastrOptions
+        //        {
+        //            Title = "Başarılı"
+        //       });
 
-        // POST: UsersController/Create
+        // POST: CategoriesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> CreateAsync(User user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrAddSuccesfull(user.Name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarılı"
+                        });
+
+
+                    await _service.AddAsync(user);
+                    await _service.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    toastNotification.AddErrorToastMessage(MessajeToastr.ToastrAddUnSuccessfull(user.Name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarısız!!!"
+                        });
+                    ModelState.AddModelError("", "Hata mesajı oluştu");
+                }
+
             }
-            catch
-            {
-                return View();
-            }
+            return View(user);
+
         }
 
         // GET: UsersController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> EditAsync(int id)
         {
-            return View();
+            var model = await _service.FindAsync(id);
+            return View(model);
         }
 
-        // POST: UsersController/Edit/5
+        // POST: CategoriesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, User user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrUpdateSuccesfull(user.Name),
+                       new ToastrOptions
+                       {
+                           Title = "Başarılı"
+                       });
+                    _service.Update(user);
+                    _service.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    toastNotification.AddErrorToastMessage(MessajeToastr.ToastrUpdateUnSuccessfull(user.Name),
+                       new ToastrOptions
+                       {
+                           Title = "Başarısız!!!"
+                       });
+                    ModelState.AddModelError("", "Hata Oluştu!");
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(user);
         }
 
         // GET: UsersController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
+            var model = await _service.FindAsync(id);
             return View();
         }
 
-        // POST: UsersController/Delete/5
+        // POST: BrandsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, User user)
         {
+            var name = user.Name;
             try
             {
+
+                _service.Delete(user);
+
+                _service.SaveChanges();
+                toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrDeleteSuccessful(name),
+                       new ToastrOptions
+                       {
+                           Title = "Başarılı"
+                       });
                 return RedirectToAction(nameof(Index));
             }
             catch

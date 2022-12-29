@@ -1,13 +1,14 @@
 ﻿using EtutCalismaProjesi.Entities;
 using EtutCalismaProjesi.Service.Absract;
 using EtutCalismaProjesi.WebUI.ToastrMessage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using static EtutCalismaProjesi.WebUI.ToastrMessage.ToastrMessage;
 
 namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize]
     public class CategoriesController : Controller
     {
         private readonly IService<Category> _service;
