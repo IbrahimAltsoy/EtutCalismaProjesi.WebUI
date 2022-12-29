@@ -127,12 +127,22 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
                 try
                 {
                     if (Image is not null) post.Image = await FileHelpers.FileLoaderAsync(Image);
+                    toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrUpdateSuccesfull(post.Name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarılı"
+                        });
                     _service.Update(post);
                     _service.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrUpdateUnSuccessfull(post.Name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarılı"
+                        });
                     ModelState.AddModelError("", "Hata Oluştu!");
                 }
             }
@@ -152,8 +162,14 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Post post)
         {
+            var name=post.Name;
             try
             {
+                toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrDeleteSuccessful(name),
+                        new ToastrOptions
+                        {
+                            Title = "Başarılı"
+                        });
                 _service.Delete(post);
                 _service.SaveChanges();
                 return RedirectToAction(nameof(Index));

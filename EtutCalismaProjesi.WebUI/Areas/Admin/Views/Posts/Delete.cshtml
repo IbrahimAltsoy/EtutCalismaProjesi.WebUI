@@ -6,8 +6,8 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
+<h3 class="p-4">Silme Sayfasına Hoşgeldiniz</h3>
+<div class="p-4 p-lg-3">
     <h4>Post</h4>
     <hr />
     <dl class="row">
@@ -36,10 +36,10 @@
             @Html.DisplayFor(model => model.Category.Name)
         </dd>
     </dl>
-    
+    class="p-lg-3"
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger p-lg-3" /> |
+        <a asp-action="Index" class="p-lg-3">Listeye Dön</a>
     </form>
 </div>
