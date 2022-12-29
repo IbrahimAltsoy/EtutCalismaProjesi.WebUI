@@ -10,9 +10,9 @@ namespace EtutCalismaProjesi.Entities
         public string Name { get; set; }
         [Display(Name = "İçerik Açıklaması")]
         public string? Description { get; set; }
-        
+
         [StringLength(150), Display(Name = "İçerik Resmi")]
-        public string? Image { get; set; }
+        public string? Image { get; set; } = "";
 
         [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]
         public DateTime CreatedTime { get; set; }

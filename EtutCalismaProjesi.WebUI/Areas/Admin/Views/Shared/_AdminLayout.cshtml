@@ -411,6 +411,21 @@
 
     <!-- Page JS -->
     <script src="~/sneat/assets/js/dashboards-analytics.js"></script>
+    <script>
+        function clicked(e) {
+            if (!confirm('Silmek istediğinden emin misin?')) {
+                e.preventDefault();
+            }
+        }
+    </script>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     @await RenderSectionAsync("Scripts",false);
     @await Component.InvokeAsync("NToastNotify");

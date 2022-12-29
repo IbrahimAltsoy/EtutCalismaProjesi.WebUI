@@ -127,10 +127,18 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Category category)
         {
+            var name = category.Name;           
             try
             {
+                
                 _service.Delete(category);
+                
                 _service.SaveChanges();
+                toastNotification.AddSuccessToastMessage(MessajeToastr.ToastrDeleteSuccessful(name),
+                       new ToastrOptions
+                       {
+                           Title = "Başarılı"
+                       });
                 return RedirectToAction(nameof(Index));
             }
             catch
