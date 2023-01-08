@@ -23,13 +23,28 @@ builder.Services.AddDbContext<DatabaseContext>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
 {
-    x.LoginPath = "/Admin/Login"; 
+    //x.LoginPath = "/Admin/Login"; 
+    //x.Cookie.Name = "AdminLogin";
+    x.LoginPath = "/Admin/Login";
+    x.LogoutPath = "/Admin/Login/Logout";
     x.Cookie.Name = "AdminLogin";
+    x.AccessDeniedPath = "/AccessDenied";
+    x.Cookie.MaxAge = TimeSpan.FromDays(1000);
 });
+
+
+
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
 
+
+// yetkilendirme Ayarları 
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
+    x.AddPolicy("UserPolicy", policy => policy.RequireClaim("Role", "User"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

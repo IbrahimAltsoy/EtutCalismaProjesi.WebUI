@@ -1,4 +1,6 @@
-﻿using EtutCalismaProjesi.WebUI.Models;
+﻿using EtutCalismaProjesi.Entities;
+using EtutCalismaProjesi.Service.Absract;
+using EtutCalismaProjesi.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,19 +8,19 @@ namespace EtutCalismaProjesi.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IService<Category> _service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IService<Category> service)
         {
-            _logger = logger;
+            _service = service;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [Route("AccessDenied")]
+        public IActionResult AccessDenied()
         {
             return View();
         }

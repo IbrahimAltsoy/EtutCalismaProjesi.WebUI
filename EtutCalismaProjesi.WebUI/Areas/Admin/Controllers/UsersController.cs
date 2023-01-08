@@ -24,7 +24,7 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
         {
             var model = await _service.GetAllAsync();
             return View(model);
-            return View();
+           
         }
 
         // GET: UsersController/Details/5

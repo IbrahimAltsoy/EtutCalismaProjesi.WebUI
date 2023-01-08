@@ -1,13 +1,4 @@
-﻿//using EtutCalismaProjesi.Entities;
-//using EtutCalismaProjesi.Service.Absract;
-//using EtutCalismaProjesi.WebUI.Utils;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-//using NToastNotify;
-//using System.Drawing;
-//using System.Drawing.Drawing2D;
-//using static EtutCalismaProjesi.WebUI.ToastrMessage.ToastrMessage;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EtutCalismaProjesi.Entities;
