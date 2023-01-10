@@ -3,10 +3,11 @@ using EtutCalismaProjesi.Data.Concreate;
 using EtutCalismaProjesi.Data;
 using EtutCalismaProjesi.Service.Absract;
 using EtutCalismaProjesi.Service.Concreate;
+using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NToastNotify;
-
+using EtutCalismaProjesi.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,12 +38,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
-
+// Identity için eklenen kod blşoğudur
+builder.Services.AddIdentity<AppUser, AppRole>(option =>
+{
+    option.Password.RequireNonAlphanumeric = true;
+    option.Password.RequireLowercase = true;
+    option.Password.RequireUppercase = true;
+})
+    .AddRoleManager<RoleManager<AppRole>>().AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
 
 // yetkilendirme Ayarları 
 builder.Services.AddAuthorization(x =>
 {
-    x.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
+    x.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Login"));
     x.AddPolicy("UserPolicy", policy => policy.RequireClaim("Role", "User"));
 });
 var app = builder.Build();
@@ -60,6 +68,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 
 app.UseAuthentication();
 app.UseAuthorization();

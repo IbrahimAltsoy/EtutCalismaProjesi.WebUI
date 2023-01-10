@@ -4,7 +4,17 @@
     {
         public static class MessajeToastr
         {
-            public static string ToastrAddSuccesfull(string title)
+			public static string ToastrLoginSuccesfull(string username)
+			{
+				return $"{username} kullanıcısı başarılı bir şekilde giriş yaptı";
+
+			}
+			public static string ToastrLoginUnSuccesfull(string username)
+			{
+				return $"{username} kullanıcısı girişi başarısız oldu";
+
+			}
+			public static string ToastrAddSuccesfull(string title)
             {
                 return $"{title} başlıklı içerik başarıyla eklendi.";
             }

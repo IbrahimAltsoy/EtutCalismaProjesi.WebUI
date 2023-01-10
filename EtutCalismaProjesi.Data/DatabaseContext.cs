@@ -1,4 +1,5 @@
 ﻿using EtutCalismaProjesi.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EtutCalismaProjesi.Data
 {
-    public class DatabaseContext :DbContext
+    public class DatabaseContext : IdentityDbContext<AppUser, AppRole, int>
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }

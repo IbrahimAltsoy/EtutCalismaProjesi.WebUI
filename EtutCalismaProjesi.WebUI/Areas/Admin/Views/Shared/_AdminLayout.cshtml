@@ -244,7 +244,8 @@
 
                             <!-- User -->
                            @* Buradan alındı*@
-                            <partial name="/Areas/Admin/Views/Login/AdminChoose.cshtml">
+                            @*@Html.Partial("AdminChoose", (double) @ViewBag.user)*@
+                            <partial name="/Areas/Admin/Views/Login/_AdminChoose.cshtml">
                             <!--/ User -->
 
 

@@ -1,7 +1,7 @@
-﻿@model dynamic
-
-
-
+﻿
+@{
+    Layout = null;
+}
 <li class="nav-item navbar-dropdown dropdown-user dropdown">
     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
         <div class="avatar avatar-online">
@@ -18,14 +18,16 @@
                             <img src="~/sneat/assets/img/avatars/1.png" class="w-px-40 h-auto rounded-circle">
                         </div>
                     </div>
-                   
+
                     <div class="flex-grow-1">
 
-                        <small class="text-muted">@ViewData["mesaj"]</small>
+                        <small class="text-muted">Admin</small>
 
-                        <span class="fw-semibold d-block"> Ibrahim ALTSOY</span>
-                        @*Ibrahim ALTSOY*@
-                 </div>   </div>
+                        <span class="fw-semibold d-block"> @ViewBag.user</span>
+
+
+                    </div>
+                </div>
             </a>
         </li>
         <li>
