@@ -32,8 +32,8 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
             }
             else
             {
-              chooseAdmin = kullanici.Name +" ve "+ kullanici.Surname;
-                
+                chooseAdmin = kullanici.Name + " ve " + kullanici.Surname;
+
 
                 var haklar = new List<Claim>()
                 {
@@ -42,17 +42,20 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
                 var kullaniciKimligi = new ClaimsIdentity(haklar, "Login");
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(kullaniciKimligi);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                
+
                 return Redirect("/Admin");
             }
 
             return View();
         }
-        //public async Task<IActionResult> AdminChoose()
-        //{
+        [HttpGet]
+        public async Task<IActionResult> AdminChoose()
+        {
 
-        //    return View();
-        //}
+            ViewData["mesaj"] = "ibo";
+
+            return View();
+        }
         public async Task<IActionResult> SignOut()
         {
             await HttpContext.SignOutAsync();

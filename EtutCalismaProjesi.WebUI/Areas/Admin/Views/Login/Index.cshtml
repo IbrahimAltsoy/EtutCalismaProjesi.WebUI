@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     Layout = null;
 }
 @model User
@@ -126,29 +124,29 @@
                         <h4 class="mb-2">Welcome to Sneat! 👋</h4>
                         <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-                        
-                          <form asp-action="Index">
-           
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-            <div class="form-floating">
-                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-                <input name="sifre" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
+                        <form asp-action="Index">
 
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
-        </form>
-                     
+                            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+                            <div class="form-floating">
+                                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                                <input name="sifre" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" value="remember-me"> Remember me
+                                </label>
+                            </div>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                            <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+                        </form>
+
 
                         <p class="text-center">
                             <span>New on our platform?</span>
