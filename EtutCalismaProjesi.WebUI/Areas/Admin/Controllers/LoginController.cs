@@ -18,11 +18,11 @@ namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 		public async Task<IActionResult> AdminChoose()
 		{
 			var model = await _userManager.FindByNameAsync(User.Identity.Name);
-			
+
 
             ViewBag.user = "merhaba"; /*model.Name + " " + model.Surname;*/
 			//ViewBag.userImage = model.ImageUrl;
-			return View(ViewBag.user);
+			return View();
 		}
 		//    private readonly DatabaseContext _context;
 

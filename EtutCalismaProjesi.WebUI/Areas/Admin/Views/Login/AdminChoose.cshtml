@@ -1,7 +1,27 @@
-﻿
+﻿@using EtutCalismaProjesi.Entities;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Mvc;
+
+@model Areas_Admin_Views_Login_AdminChoose
+
+@{
+    
+
+     UserManager<AppUser> userManager;
+    
+
+    var user = await userManager.FindByNameAsync(User.Identity.Name);
+
+    var userName = user.Name + " " + user.Surname + user.Name;
+
+
+
+}
+
 @{
     Layout = null;
 }
+
 <li class="nav-item navbar-dropdown dropdown-user dropdown">
     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
         <div class="avatar avatar-online">
@@ -23,7 +43,10 @@
 
                         <small class="text-muted">Admin</small>
 
-                        <span class="fw-semibold d-block"> @ViewBag.user</span>
+                        <span class="fw-semibold d-block">
+
+                            @*@userName*@
+                        </span>
 
 
                     </div>

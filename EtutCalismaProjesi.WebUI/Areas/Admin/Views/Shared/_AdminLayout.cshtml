@@ -1,5 +1,4 @@
-﻿
-
+﻿@model ViewDataDictionary
 
 
 <!DOCTYPE html>
@@ -229,7 +228,7 @@
                             </div>
                         </div>
                         <!-- /Search -->
-
+                   
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
@@ -243,13 +242,21 @@
 
 
                             <!-- User -->
-                           @* Buradan alındı*@
-                            @*@Html.Partial("AdminChoose", (double) @ViewBag.user)*@
-                            <partial name="/Areas/Admin/Views/Login/_AdminChoose.cshtml">
-                            <!--/ User -->
+                            @*@Html.Partial("AdminChoose", (double) TempData["user"])*@
+                            <partial name="/Areas/Admin/Views/Login/AdminChoose.cshtml">
 
-
+                            @*@Html.ActionLink("Application name", "AdminChoose", "Login",
+                            new { area = "Admin" }, new { @class = "navbar-brand" })*@
+                            @*@{
+                                Html.RenderPartial("/Areas/Admin/Views/Login/AdminChoose.cshtml", (string)(ViewBag.user));
+                            }*@
+                            @*@ViewDataDictionary viewDataDictionary =  new ViewDataDictionary();
+                            viewDataDictionary.Add("ViewBag.user", value);
+                            
+                            @Html.Partial("partialViewName", viewDataDictionary)*@
+                            
                         </ul>
+                       
                     </div>
 
 
