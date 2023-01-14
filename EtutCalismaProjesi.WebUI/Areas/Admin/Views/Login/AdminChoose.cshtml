@@ -2,13 +2,11 @@
 @using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Mvc;
 
-@model Areas_Admin_Views_Login_AdminChoose
 
-@{
-    // Buraya dikkat et eksik kaldı burayı haletmeye çalış
 
-     UserManager<AppUser> userManager;
-    
+@*@{
+    UserManager<AppUser> userManager;
+
 
     var user = await userManager.FindByNameAsync(User.Identity.Name);
 
@@ -16,7 +14,7 @@
 
 
 
-}
+}*@
 
 @{
     Layout = null;
@@ -45,7 +43,7 @@
 
                         <span class="fw-semibold d-block">
 
-                            @*@userName*@
+                            userName
                         </span>
 
 
