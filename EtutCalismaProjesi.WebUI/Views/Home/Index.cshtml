@@ -1,9 +1,30 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-    
+﻿@model IEnumerable<Post>
+
+@{
+    ViewData["Title"] = "Anasayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">Blog Siteme Hoş Geldiniz!</h1>
+            <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+    {
+       
+        @await Html.PartialAsync("_PostList", item);
+    }
+    }
+    else
+    {
+       <h2>Marka da ürün bulunmuyor.</h2>
+    }
+    
 </div>

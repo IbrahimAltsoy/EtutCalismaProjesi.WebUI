@@ -35,9 +35,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 
 
-//builder.Services.AddHttpContextAccessor();// eklendi.
+
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 // Identity için eklenen kod blşoğudur
 builder.Services.AddIdentity<AppUser, AppRole>(option =>
 {

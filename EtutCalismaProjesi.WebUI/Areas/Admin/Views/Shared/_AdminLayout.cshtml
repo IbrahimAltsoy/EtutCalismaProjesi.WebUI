@@ -1,4 +1,4 @@
-﻿@model ViewDataDictionary
+﻿
 
 
 <!DOCTYPE html>
@@ -241,19 +241,10 @@
 
 
 
-                            <!-- User -->
-                            @*@Html.Partial("AdminChoose", (double) TempData["user"])*@
+                         
                             <partial name="/Areas/Admin/Views/Login/AdminChoose.cshtml">
 
-                            @*@Html.ActionLink("Application name", "AdminChoose", "Login",
-                            new { area = "Admin" }, new { @class = "navbar-brand" })*@
-                            @*@{
-                                Html.RenderPartial("/Areas/Admin/Views/Login/AdminChoose.cshtml", (string)(ViewBag.user));
-                            }*@
-                            @*@ViewDataDictionary viewDataDictionary =  new ViewDataDictionary();
-                            viewDataDictionary.Add("ViewBag.user", value);
-                            
-                            @Html.Partial("partialViewName", viewDataDictionary)*@
+                           
                             
                         </ul>
                        

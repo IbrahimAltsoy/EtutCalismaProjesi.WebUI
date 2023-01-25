@@ -1,22 +1,10 @@
 ﻿@using EtutCalismaProjesi.Entities;
 @using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Mvc;
-
-
-
-@*@{
-    UserManager<AppUser> userManager;
-
-
-    var user = await userManager.FindByNameAsync(User.Identity.Name);
-
-    var userName = user.Name + " " + user.Surname + user.Name;
-
-
-
-}*@
+@*@inject HttpContextAccessor context;*@
 
 @{
+   
     Layout = null;
 }
 
@@ -43,7 +31,7 @@
 
                         <span class="fw-semibold d-block">
 
-                            userName
+                         @*  @context.HttpContext.User.Identity.Name *@
                         </span>
 
 
