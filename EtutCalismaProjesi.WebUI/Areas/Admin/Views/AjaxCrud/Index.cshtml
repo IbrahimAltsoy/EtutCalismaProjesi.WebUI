@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+
+
+<h3>Kategory Ajax Crud İşlemler Sayfasına Hoşgeldiniz</h3>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h2>Kategory İşlemleri</h2>
+<br />
+<div>
+    <button type="button" id="btnGetList" class="btn btn-outline-info">Kategory Listesi</button>
+<button type="button" id="btnGetById" class="btn btn-outline-primary">Kategory Getir</button>
+<button type="button" id="btnAddKategory" class="btn btn-outline-warning">Kategory Ekle</button>
+<button type="button" id="btnDeleteKategory" class="btn btn-outline-danger">Kategory Sil</button>
+<button type="button" id="btnUpdateKategory" class="btn btn-outline-success">Kategory Güncelle</button>
+</div>
+
+
+<br />
+<br />
+
+<div id="kategoryList">
+    Buraya Kategory Listesi Gelecek
+</div>
+<br />
+<div>
+    <input type="text" id="txtid" placeholder="Kategory ID değerini giriniz" class="form-control" />
+</div>
+<br />
+<div>
+    <input type="text" id="txtDelKategoryId" placeholder="Silinecek kategori ID değerini giriniz" class="form-control" />
+</div>
+<br />
+<div>
+    <input type="text" id="txtUpdateKategoryId" placeholder="güncellenecek kategori ID değerini giriniz" class="form-control" />
+    <input type="text" id="txtUpdateKategoryName" placeholder="Güncellenecek Kategori adını giriniz" class="form-control" />
+    <input type="text" id="txtUpdateKategoryDescription" placeholder="Güncellenecek kategori açıklamasını giriniz" class="form-control" />
+    <input type="datetime" id="txtUpdateKategoryCreatedtime" placeholder="güncellenecek kategory tarih bilgisini giriniz" class="form-control" />
+</div>
+<br />
+<div id="KategoryListById">
+   
+</div>
+
+<br />
+<div>
+    <input type="text" id="txtName" placeholder="Kategory adını giriniz" class="form-control" />
+    <br />
+    <input type="text" id="txtDescription" placeholder="Açıklama giriniz" class="form-control" />
+    <br />
+    <input type="text" id="txtCreatTime" placeholder="Tarih bilgisini giriniz" class="form-control" />
+
+   
+</div>
+
+<script>
+    $("#btnGetList").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Admin/AjaxCrud/CategoryList/",
+            success: function (func) {
+                let w = jQuery.parseJSON(func);
+                console.log(w);
+                let tablehtml = "<table class=table table-bordered> <tr><th> Kategory Adı </th> <th> Açıklama </th> <th> Tarih </th> </tr>";
+                $.each(w, (index, value) => {
+                    tablehtml += `<tr><td>${value.Name}</td> <td>${value.Description}</td> <td> ${value.CreatedTime} </td> </tr>`
+                });
+                tablehtml += "</table>";
+                $("#kategoryList").html(tablehtml);
+            }
+        });
+    });
+
+    $("#btnAddKategory").click(function () {
+        let kategoryValues = {
+            Name: $("#txtName").val(),
+            Description: $("#txtDescription").val(),
+            CreatedTime: $("#txtCreatTime").val()
+            
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Admin/AjaxCrud/AddCategory/",
+            data: kategoryValues,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+                alert("Kategori Başarılı Bir Şekilde Eklendi");
+            }
+        });
+    });
+
+    $("#btnGetById").click(x => {
+        let id = $("#txtid").val();
+
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Admin/AjaxCrud/GetById/",
+            data: { Id: id },
+            success: function (fun2) {
+                let result = jQuery.parseJSON(fun2);
+                console.log(result);
+                let htmlstr = `<table class=table table-bordered><tr><th>Kategory Adı</th><th>Açıklama</th><th>Tarih</th></tr><tr><td>${result.Name}</td><td>${result.Description}</td><td>${result.CreatedTime}</td></tr></table>`;
+                $("#KategoryListById").html(htmlstr);
+            }
+        });
+    });
+
+    $("#btnDeleteKategory").click(x => {
+        let id = $("#txtDelKategoryId").val();
+        $.ajax({
+            url: "/Admin/AjaxCrud/DeleteCategory/" + id,
+            type: "post",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (fun3) {
+                alert("Kategori silindi");
+            }
+        });
+    });
+
+    $("#btnUpdateKategory").click(function () {
+        let values = {
+            Id: $("#txtUpdateKategoryId").val(),
+            Name: $("#txtUpdateKategoryName").val(),
+            Description: $("#txtUpdateKategoryDescription").val(),
+            CreatedTime: $("#txtUpdateKategoryCreatedtime").val()
+
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Admin/AjaxCrud/UpdateCategory/",
+            data: values,
+            success: function (fun4) {
+                alert("Güncelleme işlemi yapıldı");
+            }
+        });
+    });
+
+</script>
