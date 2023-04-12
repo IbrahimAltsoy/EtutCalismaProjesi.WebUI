@@ -4,7 +4,7 @@ using EtutCalismaProjesi.Data;
 using EtutCalismaProjesi.Service.Absract;
 using EtutCalismaProjesi.Service.Concreate;
 using Microsoft.AspNetCore.Identity;
-
+//Ibrahim01.  i@gmail.com
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NToastNotify;
 using EtutCalismaProjesi.Entities;

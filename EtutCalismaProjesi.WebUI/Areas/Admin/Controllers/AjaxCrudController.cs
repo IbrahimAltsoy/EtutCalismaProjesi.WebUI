@@ -1,11 +1,13 @@
 ﻿using EtutCalismaProjesi.Entities;
 using EtutCalismaProjesi.Service.Absract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AllowAnonymous]
     public class AjaxCrudController : Controller
     {
         private readonly IService<Category> _service;

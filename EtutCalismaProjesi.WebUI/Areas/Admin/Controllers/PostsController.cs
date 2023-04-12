@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace EtutCalismaProjesi.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin"), Authorize]
+    [AllowAnonymous]
     public class PostsController : Controller
     {
         private readonly IService<Post> _service;
